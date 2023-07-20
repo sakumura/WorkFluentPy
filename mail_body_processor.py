@@ -11,7 +11,7 @@ def process_mail_body(mail, column_num):
     NAME_KEY = 'お名前'
     COMPANY_KEY = '貴社名'
 
-    body = mail['本文']
+    body = mail['body']
 
     # Replace and split the body
     for regex in REPLACEMENT_REGEXS:
@@ -39,14 +39,14 @@ def process_mail_body(mail, column_num):
             v = text_cleaner.around_purge(v)
         body_dict[k] = v
 
-    mail['本文'] = body_dict
+    mail['body'] = body_dict
 
     return mail
 
 
 if __name__ == "__main__":
     mail = {
-        '本文': '【お名前】貴社太郎\n【貴社名】貴社\n【弊社製品・サービス等について、将来弊社からご連絡を差し上げてもよろしいですか。】\nはい'
+        'body': '【お名前】貴社太郎\n【貴社名】貴社\n【弊社製品・サービス等について、将来弊社からご連絡を差し上げてもよろしいですか。】\nはい'
     }
     column_num = 3
     processed_mail = process_mail_body(mail, column_num)
