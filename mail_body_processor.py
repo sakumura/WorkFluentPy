@@ -20,11 +20,15 @@ def process_mail_body(mail, column_num, special_sentence):
 
     # Create columns and dictionary
     body_dict = {}
-    for i in range(column_num * 2):
-        if body[i] == '' and i == 0:  # Skip empty strings
+    count = 0
+    for i in range(len(body)):
+        if body[i].replace('\n', '') == '':  # Skip empty strings
             continue
-        if i % 2 == 1:
+        if count % 2 == 0:
             body_dict[body[i]] = body[i+1]
+        count += 1
+        if count == column_num * 2:
+            break
 
     # Text cleaning
     for k, v in body_dict.items():
