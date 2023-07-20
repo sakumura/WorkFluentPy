@@ -4,9 +4,8 @@
 import re
 import text_cleaner
 
-def process_mail_body(mail, column_num):
+def process_mail_body(mail, column_num, special_sentence):
     SEPARATOR = '■'
-    SPECIAL_SENTENCE = '自動送信メール'
     REPLACEMENT_REGEXS = [r'【', r'】']
     NAME_KEY = 'お名前'
     COMPANY_KEY = '貴社名'
@@ -14,7 +13,7 @@ def process_mail_body(mail, column_num):
     body = mail['body']
 
     # Replace and split the body
-    for regex in REPLACEMENT_REGEXS:
+    for regex in REPLACEMENT_REGEXS + [special_sentence]:
         ro = re.compile(regex)
         body = ro.sub(SEPARATOR, body)
     body = body.split(SEPARATOR)
@@ -24,9 +23,7 @@ def process_mail_body(mail, column_num):
     for i in range(column_num * 2):
         if body[i] == '' and i == 0:  # Skip empty strings
             continue
-        if i % 2 == 1 and body[i] != '●●':
-            if body[i] == SPECIAL_SENTENCE:
-                break
+        if i % 2 == 1:
             body_dict[body[i]] = body[i+1]
 
     # Text cleaning
@@ -44,8 +41,9 @@ def process_mail_body(mail, column_num):
 
 if __name__ == "__main__":
     mail = {
-        'body': '【お名前】貴社太郎\n【貴社名】貴社\n【弊社製品・サービス等について、将来弊社からご連絡を差し上げてもよろしいですか。】\nはい'
+        'body': '【お名前】貴社太郎\n【貴社名】貴社\n【弊社製品・サービス等について、将来弊社からご連絡を差し上げてもよろしいですか。】\nはい\n\n----'
     }
     column_num = 3
-    processed_mail = process_mail_body(mail, column_num)
+    special_sentence = '----'
+    processed_mail = process_mail_body(mail, column_num, special_sentence)
     print(processed_mail)
