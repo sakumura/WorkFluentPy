@@ -39,9 +39,7 @@ def process_mail_body(mail, column_num):
             v = text_cleaner.around_purge(v)
         body_dict[k] = v
 
-    mail['body'] = body_dict
-
-    return mail
+    return body_dict
 
 
 if __name__ == "__main__":
