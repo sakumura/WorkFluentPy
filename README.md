@@ -1,0 +1,10 @@
+## download_chromedriver.py
+
+このPythonスクリプトは、Windows環境で動作するGoogle Chromeと互換性のあるバージョンのChromeDriverを自動的にダウンロードします。具体的には、以下の手順に従って動作します。
+
+1. レジストリからインストール済みのGoogle Chromeのバージョンを取得します。
+2. すでにローカルにインストールされているChromeDriverのバージョンを取得します。
+3. ChromeのバージョンとChromeDriverのバージョンが一致しない場合、一致するバージョンのChromeDriverをダウンロードします。存在しないバージョンを指定した場合は、バージョン番号を減らしながら再試行します。
+4. ダウンロードしたzipファイルを解凍し、chromedriver.exeをスクリプトと同じディレクトリに移動します。
+
+このスクリプトは、Seleniumで自動化を行う際に、常に適切なバージョンのChromeDriverを使用することができます。
