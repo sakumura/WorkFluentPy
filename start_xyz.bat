@@ -1,0 +1,1 @@
+activate base & cd /d %~dp0 & python xyz.py
