@@ -1,6 +1,6 @@
 # Auto-Download ChromeDriver
 
-"download_chromedriver.py"は、Windows環境で動作するGoogle Chromeと互換性のあるバージョンのChromeDriverを自動的にダウンロードします。具体的には、以下の手順に従って動作します。
+`download_chromedriver.py`は、Windows環境で動作するGoogle Chromeと互換性のあるバージョンのChromeDriverを自動的にダウンロードします。具体的には、以下の手順に従って動作します。
 
 1. レジストリからインストール済みのGoogle Chromeのバージョンを取得します。
 2. すでにローカルにインストールされているChromeDriverのバージョンを取得します。
@@ -25,9 +25,9 @@ This Python script automatically downloads the version of ChromeDriver that is c
 
 This script ensures that you are always using the correct version of ChromeDriver when running automation with Selenium.
 
-# Start XYZ
+# Start XYZ.py
 
-"start_xyz.bat"は、以下の操作を一連の流れで行います:
+`start_xyz.bat`は、以下の操作を一連の流れで行います:
 
 1. Anacondaの任意の環境をアクティブにします（ここでは'base'を例としていますが、任意の環境名に変更可能です）。
 2. xyz.pyスクリプトが存在するディレクトリに移動します。
@@ -38,7 +38,7 @@ This script ensures that you are always using the correct version of ChromeDrive
 
 ## How it Works
 
-"start_xyz.bat" performs the following sequence of operations:
+`start_xyz.bat` performs the following sequence of operations:
 
 1. Activates an arbitrary Anaconda environment ('base' is used as an example here, but this can be changed to any environment name).
 2. Moves to the directory where the xyz.py script resides.
