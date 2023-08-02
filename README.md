@@ -45,3 +45,42 @@ This script ensures that you are always using the correct version of ChromeDrive
 3. Executes the xyz.py script.
 
 This allows for an efficient execution of the Python script using the Anaconda environment.
+
+# Utilizing the keyring library
+
+Pythonのkeyringライブラリを使用すると、システムのキーチェーンサービスに安全にパスワードを保存し、それを後で取り出すことができます。これは、例えばスクリプトでパスワードを要求する場合に役立ちます。
+
+By using the Python keyring library, you can securely store passwords in the system's keychain service and retrieve them later. This is useful, for example, when a script requires a password.
+
+## Why Use kering
+
+ソースコードや外部ファイルに直接ユーザー名やパスワードを記述することは、情報漏洩のリスクを増大させます。これらの認証情報が含まれたファイルが不適切に管理され、不正アクセスや意図しない公開の対象となった場合、第三者がそれらの情報を利用して不正な行為を行う可能性があります。したがって、認証情報は安全な方法で管理し、アクセス制御された環境で保管するべきです。
+
+Directly writing usernames and passwords into source code or external files significantly increases the risk of information leakage. If files containing these authentication details are inadequately managed and become subject to unauthorized access or unintended disclosure, third parties may exploit this information for illicit activities. Therefore, it is essential to manage authentication information securely and store it in a controlled-access environment.
+
+以下に、keyringライブラリを使用してパスワードを保存し、取り出す基本的なコードを示します。
+
+The following is a basic code snippet that uses the keyring library to store and retrieve a password:
+
+``` python
+import keyring
+
+# Set a password
+keyring.set_password("system", "username", "password")
+
+# Get the password
+password = keyring.get_password("system", "username")
+print(password)
+```
+
+このコードでは、まず`keyring.set_password関数`を使用してパスワードを保存しています。この関数は3つの引数を受け取ります：システム名（任意の文字列）、ユーザー名、そしてパスワードです。
+
+次に、`keyring.get_password関数`を使用して保存したパスワードを取り出しています。この関数はシステム名とユーザー名を引数に取り、それに対応するパスワードを返します。
+
+なお、このコードはJupyter環境では実行できません。セキュリティ上の理由から、Jupyter環境ではシステムのキーチェーンサービスにアクセスすることができません。このコードを実行するには、ローカルのPython環境を使用してください。
+
+In this code, we first use the `keyring.set_password` function to store a password. This function takes three arguments: the system name (an arbitrary string), the username, and the password.
+
+Next, we use the `keyring.get_password` function to retrieve the stored password. This function takes the system name and username as arguments and returns the corresponding password.
+
+Please note that this code cannot be executed in a Jupyter environment. Due to security reasons, Jupyter environments cannot access the system's keychain service. To run this code, use a local Python environment.
