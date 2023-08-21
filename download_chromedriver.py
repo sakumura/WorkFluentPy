@@ -42,6 +42,12 @@ def extract_and_move_chromedriver():
     """Extracts the downloaded ChromeDriver and moves it to the correct location."""
     with zipfile.ZipFile('chromedriver.zip', 'r') as zip_ref:
         zip_ref.extractall()
+
+    target_path = './chromedriver.exe'
+    
+    # If the target file exists, remove it
+    if os.path.exists(target_path):
+        os.remove(target_path)
     os.rename('./chromedriver-win64/chromedriver.exe', './chromedriver.exe')  # move the file to current directory
 
 def main():
