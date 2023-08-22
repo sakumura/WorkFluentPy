@@ -25,6 +25,30 @@ This Python script automatically downloads the version of ChromeDriver that is c
 
 This script ensures that you are always using the correct version of ChromeDriver when running automation with Selenium.
 
+## About @handle_chrome_version_error
+
+`handle_chrome_version_error`はデコレータで、関数の実行中にChromeのバージョンエラーが発生した場合の処理を担当します。エラーが発生した場合、指定された最大リトライ回数まで関数を再実行します。必要に応じて、適切なバージョンのChromeDriverをダウンロードするためのロジックを追加することもできます。
+
+使用例：
+```python
+from download_chromedriver import handle_chrome_version_error
+
+@handle_chrome_version_error
+def some_function():
+    # コードの内容
+```
+
+`handle_chrome_version_error` is a decorator that handles Chrome version errors that may occur during the execution of a function. If such an error is detected, it will retry the function up to the specified maximum number of attempts. If needed, logic can be added to download or switch to the correct version of ChromeDriver.
+
+Usage example:
+```python
+from download_chromedriver import handle_chrome_version_error
+
+@handle_chrome_version_error
+def some_function():
+    # Your code here
+```
+
 # Start XYZ.py
 
 `start_xyz.bat`は、以下の操作を一連の流れで行います:

@@ -61,5 +61,28 @@ def main():
                 file.write(chunk)
         extract_and_move_chromedriver()
 
+from selenium.common.exceptions import SessionNotCreatedException
+from functools import wraps
+
+def handle_chrome_version_error(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        MAX_RETRIES = 3
+
+        for attempt in range(MAX_RETRIES):
+            try:
+                return func(*args, **kwargs)
+            except SessionNotCreatedException as e:
+                if "chrome version" in str(e).lower():
+                    print(f"Chrome version error detected. Attempt {attempt + 1}/{MAX_RETRIES}. Retrying...")
+                    # You may implement logic to download or switch to the correct version of ChromeDriver here, if needed.
+                    main()
+                else:
+                    raise e
+        print(f"Failed after {MAX_RETRIES} attempts.")
+        raise Exception("Failed to execute the function due to Chrome version error.")
+
+    return wrapper
+
 if __name__ == '__main__':
     main()
